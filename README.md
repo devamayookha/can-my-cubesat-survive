@@ -223,7 +223,9 @@ After running a simulation, the application displays:
 * Day-by-day mission log
 * Final battery status
 
-You can add screenshots here later for a stronger GitHub portfolio presentation.
+## Screenshot
+
+Screenshots will be added in future updates.
 
 ---
 
