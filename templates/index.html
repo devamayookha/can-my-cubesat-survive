@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can My CubeSat Survive?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="brand">
+                <span class="brand-icon">🚀</span>
+                <div>
+                    <div class="brand-title">Can My CubeSat Survive?</div>
+                    <div class="brand-subtitle">Mission Power Budget Simulator</div>
+                </div>
+            </div>
+            <div class="orbit-stage">
+                <div class="planet"></div>
+                <div class="orbit-ring">
+                    <span class="satellite">🛰️</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <p class="eyebrow">New Mission</p>
+
+            <div class="info-box">
+                Design a CubeSat mission and test whether it can survive a
+                30-day mission based on power generation and energy usage.
+            </div>
+
+            {% if error %}
+            <div class="error-box">
+                ⚠️ {{ error }}
+            </div>
+            {% endif %}
+
+            <form action="/simulate" method="POST">
+
+                <label for="altitude">🛰️ Orbit Altitude (km)</label>
+                <input
+                    type="number"
+                    id="altitude"
+                    name="altitude"
+                    min="100"
+                    required
+                    value="{{ request.form.get('altitude', '') }}">
+
+                <label for="battery">🔋 Battery Capacity (Wh)</label>
+                <input
+                    type="number"
+                    id="battery"
+                    name="battery"
+                    min="1"
+                    required
+                    value="{{ request.form.get('battery', '') }}">
+
+                <label for="panel">☀️ Solar Panel Area (cm²)</label>
+                <input
+                    type="number"
+                    id="panel"
+                    name="panel"
+                    min="1"
+                    required
+                    value="{{ request.form.get('panel', '') }}">
+
+                <label for="payload">⚡ Payload Power Draw (W)</label>
+                <input
+                    type="number"
+                    id="payload"
+                    name="payload"
+                    min="0"
+                    required
+                    value="{{ request.form.get('payload', '') }}">
+
+                <button type="submit">Run Mission Simulation</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

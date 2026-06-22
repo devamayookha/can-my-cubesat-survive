@@ -1,0 +1,336 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #0b3d91;
+    --navy-dark: #082c69;
+    --red: #fc3d21;
+    --bg: #f4f6f9;
+    --surface: #ffffff;
+    --border: #e2e6ec;
+    --text: #1a2238;
+    --text-muted: #5b6b82;
+    --text-dim: #8694a8;
+    --success: #15803d;
+    --success-bg: #e7f6ec;
+    --failure: #b91c1c;
+    --failure-bg: #fdeaea;
+    --radius: 10px;
+    --shadow: 0 2px 14px rgba(15, 23, 42, 0.06);
+    --shadow-hover: 0 6px 24px rgba(15, 23, 42, 0.10);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+    background: linear-gradient(
+        135deg,
+        var(--navy),
+        var(--navy-dark)
+    );
+    padding: 22px 0;
+    box-shadow: 0 2px 16px rgba(11, 61, 145, 0.25);
+}
+
+.site-header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 16px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-icon {
+    font-size: 2rem;
+}
+
+.brand-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ---------- Orbit Animation ---------- */
+
+.orbit-stage {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 22px;
+    height: 22px;
+
+    margin-left: -11px;
+    margin-top: -11px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle at 35% 35%,
+        white,
+        var(--red) 70%
+    );
+
+    box-shadow: 0 0 16px rgba(252, 61, 33, 0.5);
+}
+
+.orbit-ring {
+    position: absolute;
+    inset: 0;
+
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.35);
+
+    animation: spin 7s linear infinite;
+}
+
+.satellite {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+
+    transform: translateX(-50%);
+    font-size: 14px;
+
+    animation: counterspin 7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes counterspin {
+    to {
+        transform: translateX(-50%) rotate(-360deg);
+    }
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 24px 40px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 22px;
+
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    font-weight: 700;
+}
+
+/* ---------- Info & Error ---------- */
+
+.info-box {
+    background: #eef3fb;
+    border-left: 4px solid var(--navy);
+
+    padding: 14px 18px;
+    border-radius: 8px;
+
+    margin-bottom: 24px;
+
+    color: var(--text-muted);
+}
+
+.error-box {
+    background: var(--failure-bg);
+    border-left: 4px solid var(--failure);
+
+    padding: 14px 18px;
+    border-radius: 8px;
+
+    margin-bottom: 24px;
+
+    color: var(--failure);
+    font-weight: 600;
+}
+
+/* ---------- Forms ---------- */
+
+label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 6px;
+
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input {
+    width: 100%;
+    padding: 11px 14px;
+
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+
+    border-color: var(--navy);
+
+    box-shadow: 0 0 0 3px
+        rgba(11, 61, 145, 0.12);
+}
+
+/* ---------- Buttons ---------- */
+
+button,
+.button {
+    display: inline-block;
+
+    width: 100%;
+
+    padding: 13px;
+    margin-top: 22px;
+
+    background: var(--red);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.15s ease;
+
+    box-shadow:
+        0 4px 14px rgba(252, 61, 33, 0.25);
+}
+
+button:hover,
+.button:hover {
+    background: #e5341a;
+    transform: translateY(-1px);
+}
+
+/* ---------- Results ---------- */
+
+.success {
+    color: var(--success);
+}
+
+.failure {
+    color: var(--failure);
+}
+
+/* ---------- Chart ---------- */
+
+canvas {
+    width: 100% !important;
+    max-height: 420px;
+}
+
+/* ---------- Table ---------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background: var(--navy);
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+
+    .site-header-inner {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .brand {
+        justify-content: center;
+    }
+
+    .container {
+        padding: 0 14px 30px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}

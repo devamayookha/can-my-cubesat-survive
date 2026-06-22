@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CubeSat Mission Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="brand">
+                <span class="brand-icon">🚀</span>
+                <div>
+                    <div class="brand-title">Can My CubeSat Survive?</div>
+                    <div class="brand-subtitle">Mission Power Budget Simulator</div>
+                </div>
+            </div>
+            <div class="orbit-stage">
+                <div class="planet"></div>
+                <div class="orbit-ring">
+                    <span class="satellite">🛰️</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <p class="eyebrow">Mission Report</p>
+
+            {% if result.status == "SURVIVED" %}
+            <h2 class="success"><span class="pulse-dot success"></span> Mission Survived</h2>
+            <p>The CubeSat successfully completed the 30-day mission.</p>
+            {% else %}
+            <h2 class="failure"><span class="pulse-dot failure"></span> Mission Failed</h2>
+            <p><strong>Failure Day:</strong> {{ result.failure_day }}</p>
+            <p><strong>Reason:</strong> {{ result.reason }}</p>
+            {% endif %}
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Status</span>
+                    <span class="stat-value">{{ result.status }}</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Days Completed</span>
+                    <span class="stat-value">{{ result.log[-1].day }} / 30</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Final Battery</span>
+                    <span class="stat-value">{{ result.log[-1].battery }} Wh</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h3>📈 Battery Level Over Time</h3>
+            <canvas id="batteryChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>📋 Daily Mission Log</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Generated (Wh)</th>
+                            <th>Consumed (Wh)</th>
+                            <th>Battery Remaining (Wh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in result.log %}
+                        <tr>
+                            <td>{{ row.day }}</td>
+                            <td>{{ row.generation }}</td>
+                            <td>{{ row.consumption }}</td>
+                            <td>{{ row.battery }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <a href="/" class="button">Run Another Simulation</a>
+
+    </div>
+
+    <script>
+        const days = [
+            {% for row in result.log %}{{ row.day }},{% endfor %}
+        ];
+        const batteryLevels = [
+            {% for row in result.log %}{{ row.battery }},{% endfor %}
+        ];
+
+        const ctx = document.getElementById("batteryChart");
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: days,
+                datasets: [{
+                    label: "Battery Remaining (Wh)",
+                    data: batteryLevels,
+                    borderColor: "#0b3d91",
+                    backgroundColor: "rgba(11, 61, 145, 0.08)",
+                    pointBackgroundColor: "#0b3d91",
+                    pointBorderColor: "#ffffff",
+                    fill: true,
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: "#5b6b82" } } },
+                scales: {
+                    x: { ticks: { color: "#5b6b82" }, grid: { color: "rgba(11, 61, 145, 0.06)" } },
+                    y: { beginAtZero: true, ticks: { color: "#5b6b82" }, grid: { color: "rgba(11, 61, 145, 0.06)" } }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
