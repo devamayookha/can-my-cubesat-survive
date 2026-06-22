@@ -216,16 +216,7 @@ Output:
 
 ## Screenshot
 
-After running a simulation, the application displays:
-
-* Mission status card
-* Battery trend graph
-* Day-by-day mission log
-* Final battery status
-
-## Screenshot
-
-Screenshots will be added in future updates.
+Coming soon.
 
 ---
 
