@@ -36,7 +36,7 @@ I built this project to learn:
 * Data visualization with Chart.js
 * Basic spacecraft power-budget concepts
 
-The goal was to create a complete engineering-style simulation project from scratch and deploy it publicly.
+The goal was to explore a spacecraft power-budget concept through an AI-assisted application experiment and deploy it publicly.
 
 ---
 
@@ -253,3 +253,14 @@ B.Tech Artificial Intelligence & Data Science
 Sona College of Technology
 
 GitHub: https://github.com/devamayookha
+
+
+---
+
+## About This Experiment
+
+This application is part of a series of seven small space-tech experiments I created in 2026 to explore different AI coding assistants. Each experiment uses a different project idea and AI tool, following the same prompting approach.
+
+**AI coding assistant used:** ChatGPT
+
+I directed the project, tested the application and worked through its deployment, while much of the code was AI-generated. The purpose of this series is to learn the tools, explore the underlying technical concepts and understand AI-assisted development workflows — not to present these builds as proof of independent programming proficiency.
